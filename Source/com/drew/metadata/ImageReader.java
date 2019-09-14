@@ -28,6 +28,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -69,7 +70,13 @@ public class ImageReader extends OutputStream {
 		ImageReader out = new ImageReader(textArea);
 		System.setOut(new PrintStream(out));
 
-		File file = new File("Tests/Data/withIptcExifGps.jpg");
+		JFileChooser filedlg = new JFileChooser();
+		filedlg.showOpenDialog(null);
+		File selected = filedlg.getSelectedFile();
+
+		String fullName = selected.getAbsolutePath();
+
+		File file = new File(fullName);
 
 		// There are multiple ways to get a Metadata object for a file
 
@@ -145,7 +152,7 @@ public class ImageReader extends OutputStream {
 		System.out.println();
 		System.out.println("-------------------------------------------------");
 		System.out.print(' ');
-		System.out.print(method);
+		System.out.println(method);
 		System.out.println("-------------------------------------------------");
 		System.out.println();
 
